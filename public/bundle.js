@@ -21846,23 +21846,9 @@
 	
 	var _api = __webpack_require__(183);
 	
-	var _api2 = _interopRequireDefault(_api);
+	var api = _interopRequireWildcard(_api);
 	
-	var _AddWidget = __webpack_require__(189);
-	
-	var _AddWidget2 = _interopRequireDefault(_AddWidget);
-	
-	var _WidgetList = __webpack_require__(191);
-	
-	var _WidgetList2 = _interopRequireDefault(_WidgetList);
-	
-	var _WidgetDetails = __webpack_require__(193);
-	
-	var _WidgetDetails2 = _interopRequireDefault(_WidgetDetails);
-	
-	var _ErrorMessage = __webpack_require__(194);
-	
-	var _ErrorMessage2 = _interopRequireDefault(_ErrorMessage);
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -21881,148 +21867,35 @@
 	    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 	
 	    _this.state = {
-	      error: null,
-	      widgets: [],
-	      activeWidget: null,
-	      editWidget: null,
-	      detailsVisible: false,
-	      addWidgetVisible: false,
-	      editWidgetVisible: false
+	      imgUrl: ''
 	    };
 	    return _this;
 	  }
 	
 	  _createClass(App, [{
+	    key: 'getPerson',
+	    value: function getPerson(name) {
+	      api.getPerson(name, function (err, userData) {
+	        if (!err) console.log(userData);else console.log(err);
+	      });
+	    }
+	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      this.refreshList();
-	    }
-	  }, {
-	    key: 'renderWidgets',
-	    value: function renderWidgets(err, widgets) {
-	      this.setState({
-	        error: err,
-	        widgets: widgets || []
-	      });
-	    }
-	  }, {
-	    key: 'refreshList',
-	    value: function refreshList(err) {
-	      this.setState({
-	        error: err,
-	        addWidgetVisible: false
-	      });
-	      _api2.default.getWidgets(this.renderWidgets.bind(this));
-	    }
-	  }, {
-	    key: 'showAddWidget',
-	    value: function showAddWidget() {
-	      this.setState({
-	        addWidgetVisible: true
-	      });
-	    }
-	  }, {
-	    key: 'hideAddWidget',
-	    value: function hideAddWidget() {
-	      this.setState({ addWidgetVisible: false });
-	    }
-	  }, {
-	    key: 'hideEditWidget',
-	    value: function hideEditWidget() {
-	      this.setState({ editWidgetVisible: false });
-	    }
-	  }, {
-	    key: 'showDetails',
-	    value: function showDetails(widget) {
-	      this.setState({
-	        activeWidget: widget,
-	        detailsVisible: true
-	      });
-	    }
-	  }, {
-	    key: 'hideDetails',
-	    value: function hideDetails() {
-	      this.setState({
-	        detailsVisible: false
-	      });
-	    }
-	  }, {
-	    key: 'deleteWidget',
-	    value: function deleteWidget(widget) {
 	      var _this2 = this;
 	
-	      _api2.default.deleteWidget(widget, function (error) {
-	        error ? _this2.setStatus({ error: error }) : _this2.refreshList();
-	      });
-	    }
-	  }, {
-	    key: 'showEditForm',
-	    value: function showEditForm(widget) {
-	      this.setState({ editWidgetVisible: true, editWidget: widget });
-	    }
-	  }, {
-	    key: 'addWidget',
-	    value: function addWidget(widget) {
-	      var _this3 = this;
-	
-	      _api2.default.appendWidget(widget, function (error) {
-	        error ? _this3.setState({ error: error }) : _this3.refreshList();
-	      });
-	    }
-	  }, {
-	    key: 'editWidget',
-	    value: function editWidget(widget) {
-	      var _this4 = this;
-	
-	      _api2.default.updateWidget(widget, function (error) {
-	        error ? _this4.setState({ error: error }) : _this4.refreshList();
-	        _this4.setState({ editWidgetVisible: false });
+	      api.getPerson("alan-jordan", function (imgUrl) {
+	        _this2.setState({ imgUrl: imgUrl });
 	      });
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _this5 = this;
-	
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(_ErrorMessage2.default, { error: this.state.error }),
-	        _react2.default.createElement(
-	          'h1',
-	          null,
-	          'Widgets FTW!'
-	        ),
-	        _react2.default.createElement(_WidgetList2.default, {
-	          showDetails: this.showDetails.bind(this),
-	          widgets: this.state.widgets,
-	          deleteWidget: this.deleteWidget.bind(this),
-	          showEditForm: this.showEditForm.bind(this)
-	        }),
-	        _react2.default.createElement(
-	          'p',
-	          null,
-	          _react2.default.createElement(
-	            'a',
-	            { id: 'show-widget-link', href: '#', onClick: function onClick(e) {
-	                return _this5.showAddWidget(e);
-	              } },
-	            'Add widget'
-	          )
-	        ),
-	        this.state.addWidgetVisible && _react2.default.createElement(_AddWidget2.default, {
-	          submitCallback: this.addWidget.bind(this),
-	          cancelCallback: this.hideAddWidget.bind(this)
-	        }),
-	        this.state.editWidgetVisible && _react2.default.createElement(_AddWidget2.default, {
-	          submitCallback: this.editWidget.bind(this),
-	          cancelCallback: this.hideEditWidget.bind(this),
-	          widget: this.state.editWidget
-	        }),
-	        this.state.detailsVisible && _react2.default.createElement(_WidgetDetails2.default, {
-	          isVisible: this.state.detailsVisible,
-	          hideDetails: this.hideDetails.bind(this),
-	          widget: this.state.activeWidget })
+	        'Hi this is App component',
+	        _react2.default.createElement('img', { src: this.state.imgUrl })
 	      );
 	    }
 	  }]);
@@ -22038,52 +21911,15 @@
 
 	'use strict';
 	
-	var _superagent = __webpack_require__(184);
+	var request = __webpack_require__(184);
 	
-	var _superagent2 = _interopRequireDefault(_superagent);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var widgetUrl = 'http://localhost:3000/widgets';
-	
-	module.exports = {
-	  getWidgets: getWidgets,
-	  appendWidget: appendWidget,
-	  deleteWidget: deleteWidget,
-	  updateWidget: updateWidget
-	};
-	
-	function getWidgets(callback) {
-	  _superagent2.default.get(widgetUrl).end(function (err, res) {
-	    if (err) {
-	      callback(err);
-	    } else {
-	      callback(null, res.body);
-	    }
+	function getPerson(name, callback) {
+	  request.get('/api/v1/people').query({ name: name }).end(function (err, res) {
+	    if (!err) callback(res.body);else console.log(err);
 	  });
 	}
 	
-	function appendWidget(widget, callback) {
-	  _superagent2.default.post(widgetUrl).send(widget).end(function (err, res) {
-	    if (err) {
-	      callback(err);
-	    } else {
-	      callback();
-	    }
-	  });
-	}
-	
-	function deleteWidget(widget, callback) {
-	  _superagent2.default.delete(widgetUrl + '/' + widget.id).end(function (err) {
-	    callback(err);
-	  });
-	}
-	
-	function updateWidget(widget, callback) {
-	  _superagent2.default.put(widgetUrl + '/' + widget.id).send(widget).end(function (err) {
-	    callback(err);
-	  });
-	}
+	module.exports = { getPerson: getPerson };
 
 /***/ }),
 /* 184 */
@@ -23670,370 +23506,6 @@
 	
 	module.exports = request;
 
-
-/***/ }),
-/* 189 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _api = __webpack_require__(183);
-	
-	var _api2 = _interopRequireDefault(_api);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var WidgetForm = function (_React$Component) {
-	  _inherits(WidgetForm, _React$Component);
-	
-	  function WidgetForm(props) {
-	    _classCallCheck(this, WidgetForm);
-	
-	    var _this = _possibleConstructorReturn(this, (WidgetForm.__proto__ || Object.getPrototypeOf(WidgetForm)).call(this, props));
-	
-	    _this.state = _extends({}, props.widget) || {
-	      name: '',
-	      price: '',
-	      mfg: '',
-	      inStock: ''
-	    };
-	    return _this;
-	  }
-	
-	  _createClass(WidgetForm, [{
-	    key: 'componentWillReceiveProps',
-	    value: function componentWillReceiveProps(nextProps, nextState) {
-	      if (this.state != nextProps.widget) {
-	        this.setState(_extends({}, nextProps.widget));
-	      }
-	    }
-	  }, {
-	    key: 'fieldChanged',
-	    value: function fieldChanged(e) {
-	      e.preventDefault();
-	      this.setState(_defineProperty({}, e.target.name, e.target.value));
-	    }
-	  }, {
-	    key: 'save',
-	    value: function save(e) {
-	      e.preventDefault();
-	      var widget = this.state;
-	      this.props.submitCallback(widget);
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var _this2 = this;
-	
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'widget-form' },
-	        _react2.default.createElement(
-	          'form',
-	          null,
-	          _react2.default.createElement(
-	            'p',
-	            null,
-	            _react2.default.createElement('input', { placeholder: 'Name', name: 'name',
-	              onChange: function onChange(e) {
-	                return _this2.fieldChanged(e);
-	              },
-	              value: this.state.name
-	            })
-	          ),
-	          _react2.default.createElement(
-	            'p',
-	            null,
-	            _react2.default.createElement('input', { placeholder: 'Price', name: 'price',
-	              onChange: function onChange(e) {
-	                return _this2.fieldChanged(e);
-	              },
-	              value: this.state.price
-	            })
-	          ),
-	          _react2.default.createElement(
-	            'p',
-	            null,
-	            _react2.default.createElement('input', { placeholder: 'Manufacturer', name: 'mfg',
-	              onChange: function onChange(e) {
-	                return _this2.fieldChanged(e);
-	              },
-	              value: this.state.mfg
-	            })
-	          ),
-	          _react2.default.createElement(
-	            'p',
-	            null,
-	            _react2.default.createElement('input', { placeholder: 'In stock', name: 'inStock',
-	              onChange: function onChange(e) {
-	                return _this2.fieldChanged(e);
-	              },
-	              value: this.state.inStock
-	            })
-	          ),
-	          _react2.default.createElement(
-	            'button',
-	            { onClick: function onClick(e) {
-	                return _this2.save(e);
-	              } },
-	            'Save widget'
-	          ),
-	          ' ',
-	          ' ',
-	          _react2.default.createElement(
-	            'a',
-	            { href: '#', onClick: this.props.cancelCallback },
-	            'Cancel'
-	          )
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return WidgetForm;
-	}(_react2.default.Component);
-	
-	exports.default = WidgetForm;
-
-/***/ }),
-/* 190 */,
-/* 191 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _WidgetListItem = __webpack_require__(192);
-	
-	var _WidgetListItem2 = _interopRequireDefault(_WidgetListItem);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	exports.default = function (props) {
-	  return _react2.default.createElement(
-	    'div',
-	    { className: 'widget-list' },
-	    _react2.default.createElement(
-	      'h2',
-	      null,
-	      'List'
-	    ),
-	    props.widgets.map(function (widget) {
-	      return _react2.default.createElement(_WidgetListItem2.default, {
-	        key: widget.id,
-	        widget: widget,
-	        hideDetails: props.hideDetails,
-	        showDetails: props.showDetails,
-	        deleteWidget: props.deleteWidget,
-	        showEditForm: props.showEditForm
-	      });
-	    })
-	  );
-	};
-
-/***/ }),
-/* 192 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	exports.default = function (_ref) {
-	  var widget = _ref.widget,
-	      showDetails = _ref.showDetails,
-	      deleteWidget = _ref.deleteWidget,
-	      showEditForm = _ref.showEditForm;
-	
-	  return _react2.default.createElement(
-	    'div',
-	    { className: 'widget-list-item' },
-	    widget.name + ' ',
-	    _react2.default.createElement(
-	      'a',
-	      { href: '#', onClick: function onClick() {
-	          return showDetails(widget);
-	        } },
-	      'details'
-	    ),
-	    ' ',
-	    " | ",
-	    _react2.default.createElement(
-	      'a',
-	      { href: '#', id: 'delete-' + widget.id, onClick: function onClick() {
-	          return deleteWidget(widget);
-	        } },
-	      'delete'
-	    ),
-	    ' ',
-	    " | ",
-	    _react2.default.createElement(
-	      'a',
-	      { href: '#', id: 'edit-' + widget.id, onClick: function onClick() {
-	          return showEditForm(widget);
-	        } },
-	      'edit'
-	    )
-	  );
-	};
-
-/***/ }),
-/* 193 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	exports.default = function (props) {
-	  var widget = props.widget,
-	      isVisible = props.isVisible;
-	
-	  var hide = function hide() {
-	    return props.hideDetails();
-	  };
-	  var classes = 'widget-details ' + (isVisible ? 'visible' : 'hidden');
-	  return _react2.default.createElement(
-	    'div',
-	    { className: classes },
-	    _react2.default.createElement(
-	      'h2',
-	      null,
-	      'Details'
-	    ),
-	    _react2.default.createElement(
-	      'p',
-	      null,
-	      'Name: ',
-	      widget.name
-	    ),
-	    _react2.default.createElement(
-	      'p',
-	      null,
-	      'Price: ',
-	      widget.price
-	    ),
-	    _react2.default.createElement(
-	      'p',
-	      null,
-	      'Mfg: ',
-	      widget.mfg
-	    ),
-	    _react2.default.createElement(
-	      'p',
-	      null,
-	      'In stock: ',
-	      widget.inStock
-	    ),
-	    _react2.default.createElement(
-	      'a',
-	      { href: '#', onClick: hide },
-	      'Close'
-	    )
-	  );
-	};
-
-/***/ }),
-/* 194 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var ErrorMessage = function (_React$Component) {
-	  _inherits(ErrorMessage, _React$Component);
-	
-	  function ErrorMessage() {
-	    _classCallCheck(this, ErrorMessage);
-	
-	    return _possibleConstructorReturn(this, (ErrorMessage.__proto__ || Object.getPrototypeOf(ErrorMessage)).apply(this, arguments));
-	  }
-	
-	  _createClass(ErrorMessage, [{
-	    key: 'shouldComponentUpdate',
-	    value: function shouldComponentUpdate() {
-	      return !!this.props.error;
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var errorView = null;
-	      if (this.props.error) {
-	        errorView = _react2.default.createElement(
-	          'div',
-	          { className: 'error' },
-	          'Error: ',
-	          this.props.error.message
-	        );
-	      }
-	      return errorView;
-	    }
-	  }]);
-	
-	  return ErrorMessage;
-	}(_react2.default.Component);
-	
-	exports.default = ErrorMessage;
 
 /***/ })
 /******/ ]);
