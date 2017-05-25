@@ -3,8 +3,6 @@ var bodyParser = require('body-parser')
 var cors = require('cors')
 var path = require('path')
 
-//var widgets = require('./routes/widgets')
-
 var app = express()
 
 app.use(bodyParser.json())
