@@ -8,12 +8,10 @@ export default class Wall extends React.Component {
 
   render() {
     return (
-      <div className='row'>
-        <div className='col col-md-12'>
+      <div className='wall'>
           {Array(12).fill(".").map((item) => {
             return <Tile />
           })}
-        </div>
       </div>
     )
   }
