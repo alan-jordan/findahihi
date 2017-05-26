@@ -11,6 +11,12 @@ body {
 
 }
 
+.navbar {
+  background-color: #fff;
+  margin: 0 75px 10px 75px;
+  font-weight: bolder;
+}
+
 .tile {
   background: url(hihi.jpg) no-repeat center;
   background-size: 25vh 25vh;
@@ -22,7 +28,9 @@ body {
 }
 
 .wall {
+  text-align: center;
   display: flex;
+  justify-content: center;
   flex-direction: row;
   flex-wrap: wrap;
 }
