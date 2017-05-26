@@ -21908,8 +21908,7 @@
 	          'div',
 	          { className: 'container' },
 	          _react2.default.createElement(_Header2.default, null),
-	          _react2.default.createElement(_reactRouterDom.Route, { path: '/', exact: true, component: _Wall2.default }),
-	          _react2.default.createElement('img', { src: this.state.imgUrl })
+	          _react2.default.createElement(_reactRouterDom.Route, { path: '/', exact: true, component: _Wall2.default })
 	        )
 	      );
 	    }

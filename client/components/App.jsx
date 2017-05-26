@@ -33,7 +33,6 @@ componentDidMount(){
         <div className="container">
           <Header />
           <Route path ='/' exact={true} component = {Wall} />
-          <img src={this.state.imgUrl}></img>
         </div>
       </Router>
 
