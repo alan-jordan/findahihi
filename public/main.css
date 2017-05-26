@@ -1,8 +1,14 @@
 body {
     font-family: arial;
+    background: url(hihi.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 .container {
+
 }
 
 .tile {
@@ -19,4 +25,9 @@ body {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+}
+
+.userImage {
+  width: 25vh;
+  height: 25vh;
 }

@@ -9,8 +9,8 @@ export default class Wall extends React.Component {
   render() {
     return (
       <div className='wall'>
-          {Array(12).fill(".").map((item) => {
-            return <Tile />
+          {Array(12).fill(".").map((item, i) => {
+            return <Tile key={i}/>
           })}
       </div>
     )
