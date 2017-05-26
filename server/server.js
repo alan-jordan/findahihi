@@ -3,11 +3,9 @@ var bodyParser = require('body-parser')
 var cors = require('cors')
 var path = require('path')
 
-<<<<<<< HEAD
-=======
+
 var peopleRoutes = require('./routes/people')
 
->>>>>>> api
 var app = express()
 
 app.use(bodyParser.json())
