@@ -27027,6 +27027,10 @@
 	
 	var _reactRouterDom = __webpack_require__(183);
 	
+	var _Tile = __webpack_require__(231);
+	
+	var _Tile2 = _interopRequireDefault(_Tile);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -27050,7 +27054,13 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'row' },
-	        _react2.default.createElement('div', { className: 'col col-md-12' })
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'col col-md-12' },
+	          Array(12).fill(".").map(function (item) {
+	            return _react2.default.createElement(_Tile2.default, null);
+	          })
+	        )
 	      );
 	    }
 	  }]);
@@ -27059,6 +27069,109 @@
 	}(_react2.default.Component);
 	
 	exports.default = Wall;
+
+/***/ }),
+/* 231 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouterDom = __webpack_require__(183);
+	
+	var _data = __webpack_require__(232);
+	
+	var _data2 = _interopRequireDefault(_data);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Tile = function (_React$Component) {
+	  _inherits(Tile, _React$Component);
+	
+	  function Tile(props) {
+	    _classCallCheck(this, Tile);
+	
+	    var _this = _possibleConstructorReturn(this, (Tile.__proto__ || Object.getPrototypeOf(Tile)).call(this, props));
+	
+	    _this.state = {
+	      user: null
+	    };
+	    return _this;
+	  }
+	
+	  _createClass(Tile, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      this.selectUser();
+	    }
+	  }, {
+	    key: 'selectUser',
+	    value: function selectUser() {
+	      this.setState({
+	        user: _data2.default.users[0]
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'tile' },
+	        this.state.user && _react2.default.createElement(
+	          'h1',
+	          null,
+	          this.state.user.login
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return Tile;
+	}(_react2.default.Component);
+	
+	exports.default = Tile;
+
+/***/ }),
+/* 232 */
+/***/ (function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var hihis = {
+	  users: [{
+	    login: 'Cici',
+	    avatar_url: 'https://avatars3.githubusercontent.com/u/25610428?v=3&s=400',
+	    description: 'Im from Beijing, and I love to get my hair shampooed in salons'
+	  }, {
+	    login: 'Alan',
+	    avatar_url: 'https://avatars0.githubusercontent.com/u/80690?v=3&s=460',
+	    description: 'I love Nintendo'
+	  }, {
+	    login: 'Matt',
+	    avatar_url: 'https://avatars3.githubusercontent.com/u/25002466?v=3&s=400',
+	    description: 'Founder of the EDA MACTAS Migoreng and Cheese Toastie Appreciation Society'
+	  }]
+	};
+	
+	exports.default = hihis;
 
 /***/ })
 /******/ ]);

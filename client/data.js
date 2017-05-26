@@ -18,3 +18,5 @@ const hihis = {
 
   ]
 }
+
+export default hihis

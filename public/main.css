@@ -1,1 +1,18 @@
+body {
+    background: url(hihi.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    font-family: arial;
+}
 
+.container {
+  height: 100vh;
+  width: 100vh;
+}
+
+.tile {
+  width:25vh;
+  height:25vh;
+}
