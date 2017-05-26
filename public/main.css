@@ -1,6 +1,6 @@
 body {
     font-family: arial;
-    background: url(hihi.jpg) no-repeat center center fixed;
+    background: url('/hihi.jpg') no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -18,7 +18,7 @@ body {
 }
 
 .tile {
-  background: url(hihi.jpg) no-repeat center;
+  background: url('/hihi.jpg') no-repeat center;
   background-size: 25vh 25vh;
   width:25vh;
   height:25vh;
