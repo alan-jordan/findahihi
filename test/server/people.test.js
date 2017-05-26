@@ -3,14 +3,17 @@ import request from 'supertest'
 
 import app from '../../server/server'
 
-// the server keeps the widgets in memory so no knex setup needed
-
-test.serial.cb('GET /people', t => {
+test.serial.cb('GET user profile picture url', t => {
   request(app)
     .get('/api/v1/people')
+    .query({name: 'matt-raines'})
     .expect(200)
     .end((err, res) => {
-      t.ifError(err)
-      t.end()
+      return new Promise ((resolve, reject) => {
+        t.ifError(err)
+        t.is(res.body,'https://avatars1.githubusercontent.com/u/25002466?v=3')
+        t.end()
+        resolve()
+      })
     })
 })
